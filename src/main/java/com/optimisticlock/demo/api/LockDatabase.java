@@ -17,7 +17,7 @@ class LockDatabase {
     private final DemoRepository demoRepository;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    DemoEntity addOneToCounter(String id) throws Exception {
+    public DemoEntity addOneToCounter(String id) throws Exception {
         int count = counter.incrementAndGet();
         log.info("count {}", count);
         DemoEntity demoEntity = demoRepository.findById(id).get();
@@ -30,7 +30,7 @@ class LockDatabase {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    DemoEntity addOneToCounterRequireNew(String id) {
+    public DemoEntity addOneToCounterRequireNew(String id) {
         int count = counter.incrementAndGet();
         log.info("countAgain {}", count);
         DemoEntity demoEntity = demoRepository.findById(id).get();
@@ -43,7 +43,7 @@ class LockDatabase {
     }
 
     @Transactional()
-    DemoEntity rollback(String id) {
+    public DemoEntity rollback(String id) {
         int count = counter.incrementAndGet();
         log.info("countAgain {}", count);
         DemoEntity demoEntity = demoRepository.findById(id).get();
