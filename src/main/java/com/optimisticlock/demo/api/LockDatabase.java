@@ -30,7 +30,7 @@ class LockDatabase {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    DemoEntity addOneToCounterRequireNew(String id) throws Exception {
+    DemoEntity addOneToCounterRequireNew(String id) {
         int count = counter.incrementAndGet();
         log.info("countAgain {}", count);
         DemoEntity demoEntity = demoRepository.findById(id).get();
@@ -42,4 +42,7 @@ class LockDatabase {
         return demoEntity;
     }
 
+    void resetCounter() {
+        counter = new AtomicInteger(0);
+    }
 }

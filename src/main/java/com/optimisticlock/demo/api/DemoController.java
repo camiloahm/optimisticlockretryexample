@@ -43,6 +43,14 @@ class DemoController {
         return ResponseEntity.ok(countRetryNewTransaction(demoId, 5));
     }
 
+    @GetMapping(
+            value = "/reset",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity countAgain() {
+        lockRepository.resetCounter();
+        return ResponseEntity.ok("");
+    }
+
     private DemoEntity countRetryNewTransaction(final String id, int counter) throws Exception {
         try {
             return lockRepository.addOneToCounterRequireNew(id);
