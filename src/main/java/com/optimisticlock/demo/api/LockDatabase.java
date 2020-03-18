@@ -16,7 +16,7 @@ class LockDatabase {
     AtomicInteger counter = new AtomicInteger(0);
     private final DemoRepository demoRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public DemoEntity addOneToCounter(String id) throws Exception {
         int count = counter.incrementAndGet();
         log.info("count {}", count);
