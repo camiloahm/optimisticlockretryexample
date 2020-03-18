@@ -4,3 +4,15 @@ spring:
     username: oms
     password: oms
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database=MYSQL:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org:
+      springframework:
+        transaction=TRACE:
+
