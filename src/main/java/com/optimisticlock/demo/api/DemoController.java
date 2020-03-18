@@ -44,6 +44,13 @@ class DemoController {
     }
 
     @GetMapping(
+            value = "/rollback/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<DemoEntity> rollback(@PathVariable("id") String demoId) throws Exception {
+        return ResponseEntity.ok(lockRepository.rollback("1"));
+    }
+
+    @GetMapping(
             value = "/reset",
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity countAgain() {

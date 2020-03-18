@@ -42,6 +42,16 @@ class LockDatabase {
         return demoEntity;
     }
 
+    @Transactional
+    DemoEntity rollback(String id) {
+        int count = counter.incrementAndGet();
+        log.info("countAgain {}", count);
+        DemoEntity demoEntity = demoRepository.findById(id).get();
+        demoEntity.setCounter(demoEntity.getCounter() + 1);
+        demoRepository.save(demoEntity);
+        throw new RuntimeException("error in countAgain " + count);
+    }
+
     void resetCounter() {
         counter = new AtomicInteger(0);
     }
