@@ -1,23 +1,27 @@
 package com.optimisticlock.demo.api;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @NoArgsConstructor
 @Entity(name = "DEMO")
+@Getter
+@Setter
 final class DemoEntity {
 
     @Id
     private String id;
+
     private Integer counter;
 
-    public Integer getCounter() {
-        return counter;
-    }
+    private String sampleText;
 
-    public void setCounter(final Integer counter) {
-        this.counter = counter;
-    }
+    @Version
+    private Integer version;
+
 }
