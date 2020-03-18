@@ -29,15 +29,15 @@ class LockDatabase {
         return demoEntity;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public DemoEntity addOneToCounterRequireNew(String id) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public DemoEntity addOneToCounterRequireNew(String id) throws Exception {
         int count = counter.incrementAndGet();
         log.info("countAgain {}", count);
         DemoEntity demoEntity = demoRepository.findById(id).get();
         demoEntity.setCounter(demoEntity.getCounter() + 1);
         demoRepository.save(demoEntity);
         if (count % 10 == 0) {
-            throw new RuntimeException("error in countAgain " + count);
+            throw new Exception("error in countAgain " + count);
         }
         return demoEntity;
     }
