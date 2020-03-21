@@ -1,3 +1,5 @@
+use demo;
+
 drop table if exists DEMO;
 
 create table if not exists DEMO
